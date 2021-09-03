@@ -1,8 +1,7 @@
 from django.db import models
-from django.db.models.base import Model
 from django.db.models.deletion import CASCADE
-from django.db.models.fields import CharField, DateField, IntegerField
-from django.db.models.fields.related import ForeignKey
+from django.db.models.fields import BooleanField, CharField, DateField, FloatField, IntegerField
+from django.db.models.fields.related import ForeignKey, ManyToManyField
 
 
 class Employee(models.Model):
@@ -32,11 +31,31 @@ class Product(models.Model):
     price = models.IntegerField(default=0)
 
 
+class Item(models.Model):
+    number = IntegerField("序号")
+    price_type = IntegerField()
+    picture = CharField(max_length=200)
+    project_type = CharField("项目类型", max_length=10)
+    content = CharField(max_length=200)
+    texture = CharField(max_length=100)
+    width = IntegerField()
+    high = IntegerField()
+    requirment = CharField(max_length=200)
+    count = IntegerField()
+    unit = CharField(max_length=10)
+    money = IntegerField()
+    outside = BooleanField()
+    need_install = BooleanField()
+    need_deliver = BooleanField()
+    need_design = BooleanField()
+    area = FloatField()
+
+
 class Order(models.Model):
-    source = ForeignKey(Employee, on_delete=CASCADE)
+    source = CharField(max_length=20)
     department = CharField(max_length=20)
-    salesman = ForeignKey(Employee, on_delete=CASCADE)
-    follow_man = ForeignKey(Employee, on_delete=CASCADE)
+    salesman = CharField(max_length=20)
+    follow_man = CharField(max_length=20)
     install_requirement = CharField("安装要求", max_length=500)
     deliver_requirement = CharField("提货要求", max_length=500)
     deliver_date = DateField("交货日期")
@@ -50,11 +69,7 @@ class Order(models.Model):
     input_account = IntegerField("收款账户")
     completed_time = DateField("结账日期")
     design_type = IntegerField("设计类型")
-    design_person = ForeignKey(Employee, on_delete=CASCADE)
+    design_person = CharField(max_length=20)
     order_type = IntegerField("单据类型")
     comment = CharField("备注", max_length=500)
-
-class Item(models.Model):
-    number = IntegerField("序号")
-    price_type = IntegerField()
-    picture = CharField()
+    items = ManyToManyField(Item)
