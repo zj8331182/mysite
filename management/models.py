@@ -4,9 +4,16 @@ from django.db.models.fields import BooleanField, CharField, DateField, FloatFie
 from django.db.models.fields.related import ForeignKey, ManyToManyField
 
 
+DEAPRTMENT_LIST = (('sale', '销售部'), ('market', '市场部'),
+                   ('office', '办公室'), ('randd', '研发部'))
+
+
 class Employee(models.Model):
     name = models.CharField(max_length=20)
-    department = models.CharField(max_length=20)
+    department = models.CharField(max_length=20, choices=DEAPRTMENT_LIST)
+
+    def __str__(self):
+        return self.name
 
 
 class Customer(models.Model):

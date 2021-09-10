@@ -1,9 +1,11 @@
-from django.shortcuts import render
+from management.serializers import EmployeeSerializer
+from management.models import Employee
+from rest_framework import generics
 
 # Create your views here.
-from django.http import HttpResponse
+from rest_framework import viewsets
 
 
-def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
-    
+class EmployeeViewSet(viewsets.ModelViewSet):
+    queryset = Employee.objects.all()
+    serializer_class = EmployeeSerializer
