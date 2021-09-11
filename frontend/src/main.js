@@ -2,7 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-import ElementUI, {Aside, Container, Main, Menu, MenuItem, MenuItemGroup, Submenu} from 'element-ui'
+import ElementUI, {Aside, Container, Main, Menu, MenuItem, PageHeader} from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import router from './router'
 import globalVariable from '@/api/globalVariable.js'
@@ -15,6 +15,7 @@ Vue.use(Menu)
 Vue.use(MenuItem)
 Vue.use(Main)
 Vue.use(Aside)
+Vue.use(PageHeader)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
