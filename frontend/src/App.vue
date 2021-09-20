@@ -5,7 +5,7 @@
     </el-header>
     <el-container>
       <el-aside width="20%" style="border: 1px solid #eee">
-        <el-menu :default-active="$router.path" router>
+        <el-menu default-active="/employee" router>
           <el-menu-item index="/employee"> 员工管理 </el-menu-item>
           <el-menu-item index="/customer" route="customer">
             客户管理
@@ -41,5 +41,8 @@ body,
 </style>
 
 <script>
-export default {};
+export default {
+  mounted() {
+  }
+}
 </script>

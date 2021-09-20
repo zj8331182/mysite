@@ -29,6 +29,6 @@ export default new VueRouter({
       path: '/order',
       name: 'order',
       component: Order
-    },
+    }
   ]
 })

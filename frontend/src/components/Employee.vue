@@ -82,7 +82,7 @@
 }
 </style>
 <script>
-import Axios from "axios";
+import Axios from 'axios'
 export default {
   data() {
     return {
@@ -90,80 +90,80 @@ export default {
       isLoading: true,
       departments: this.GLOBAL.allDepartments,
       editedEmployee: {},
-      departmentsMap: new Map(),
-    };
+      departmentsMap: new Map()
+    }
   },
   methods: {
     handleClickDelete(row) {
-      this.isLoading = true;
-      Axios.delete(this.GLOBAL.baseUrl + "employee/" + row.id)
+      this.isLoading = true
+      Axios.delete(this.GLOBAL.baseUrl + 'employee/' + row.id)
         .then(() => {
-          his.showSuccess();
-          this.fetchData();
+          this.showSuccess()
+          this.fetchData()
         })
         .catch((err) => {
-          this.showError(err);
-        });
+          this.showError(err)
+        })
     },
     handleClickEdit(row) {
-      row.isEdit = true;
+      row.isEdit = true
     },
     handleClickAdd() {
-      this.$router.push("/employee/add");
+      this.$router.push('/employee/add')
     },
     handleClickUpdate(row) {
-      Axios.put(this.GLOBAL.baseUrl + "employee/" + row.id + "/", {
+      Axios.put(this.GLOBAL.baseUrl + 'employee/' + row.id + '/', {
         name: this.editedEmployee.name,
-        department: this.editedEmployee.department,
+        department: this.editedEmployee.department
       })
         .then(() => {
-          this.showSuccess();
-          row.isEdit = false;
-          row.name = this.editedEmployee.name;
-          row.department = this.editedEmployee.department;
+          this.showSuccess()
+          row.isEdit = false
+          row.name = this.editedEmployee.name
+          row.department = this.editedEmployee.department
         })
         .catch((err) => {
-          this.showError(err);
-        });
+          this.showError(err)
+        })
     },
     fetchData() {
-      Axios.get(this.GLOBAL.baseUrl + "employee/")
+      Axios.get(this.GLOBAL.baseUrl + 'employee/')
         .then((res) => {
-          this.isLoading = false;
-          var table = res.data;
+          this.isLoading = false
+          var table = res.data
           table.forEach((item) => {
-            item.isEdit = false;
-          });
-          this.tableData = table;
+            item.isEdit = false
+          })
+          this.tableData = table
         })
         .catch((err) => {
-          this.showError(err);
-        });
+          this.showError(err)
+        })
     },
     showError(err) {
-      this.isLoading = false;
+      this.isLoading = false
       this.$message({
         showClose: true,
         message: err,
-        type: "error",
-      });
+        type: 'error'
+      })
     },
     showSuccess() {
       this.$message({
         showClose: true,
-        message: "操作成功",
-        type: "error",
-      });
+        message: '操作成功',
+        type: 'error'
+      })
     },
     getDepartmentName(departmentCode) {
-      return this.departmentsMap.get(departmentCode);
-    },
+      return this.departmentsMap.get(departmentCode)
+    }
   },
   mounted() {
-    this.fetchData();
+    this.fetchData()
     this.departments.forEach((department) => {
-      this.departmentsMap.set(department.value, department.label);
-    });
-  },
-};
+      this.departmentsMap.set(department.value, department.label)
+    })
+  }
+}
 </script>

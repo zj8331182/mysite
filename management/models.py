@@ -24,7 +24,8 @@ class Customer(models.Model):
     address = models.CharField(max_length=200)
     pay_way = models.IntegerField(default=0)
     discount_package = models.IntegerField(default=0)
-    responsable_person = ForeignKey(Employee, on_delete=CASCADE)
+    responsable_person = ForeignKey(
+        Employee, related_name='responsable_person', on_delete=CASCADE)
     recent_contract_time = DateField("最近联系")
     recent_deal_time = DateField("最近交易")
     comment = CharField("备注", max_length=200)

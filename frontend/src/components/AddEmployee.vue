@@ -25,53 +25,53 @@
 </template>
 
 <script>
-import Axios from "axios";
+import Axios from 'axios'
 
 export default {
   data() {
     return {
       departments: this.GLOBAL.allDepartments,
       form: {},
-      isLoading: false,
-    };
+      isLoading: false
+    }
   },
   methods: {
     back() {
-      this.$router.back();
+      this.$router.back()
     },
     submit() {
-      this.isLoading = true;
+      this.isLoading = true
       Axios.post(
-        this.GLOBAL.baseUrl + "employee/",
+        this.GLOBAL.baseUrl + 'employee/',
         {
           name: this.form.name,
-          department: this.form.department,
+          department: this.form.department
         },
         {
           header: {
-            "X-CSRFToken": this.GLOBAL.getCookie("csrftoken"),
-          },
+            'X-CSRFToken': this.GLOBAL.getCookie('csrftoken')
+          }
         }
       )
         .then(() => {
-          this.isLoading = false;
+          this.isLoading = false
           this.$message({
             showClose: true,
-            message: "操作成功",
-            type: "success",
-          });
+            message: '操作成功',
+            type: 'success'
+          })
         })
         .catch((err) => {
-          this.isLoading = false;
+          this.isLoading = false
           this.$message({
             showClose: true,
             message: err,
-            type: "error",
-          });
-        });
-    },
-  },
-};
+            type: 'error'
+          })
+        })
+    }
+  }
+}
 </script>
 
 <style>
